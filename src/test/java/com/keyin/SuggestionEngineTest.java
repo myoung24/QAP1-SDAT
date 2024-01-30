@@ -62,7 +62,7 @@ public class SuggestionEngineTest {
 
     @Test
     public void sampleTest() {
-        Assertions.assertFalse(testInstanceSame);
+        Assertions.assertTrue(testInstanceSame);
     }
 
 
