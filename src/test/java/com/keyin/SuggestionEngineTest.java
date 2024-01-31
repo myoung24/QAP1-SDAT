@@ -61,9 +61,22 @@ public class SuggestionEngineTest {
     }
 
     @Test
-    public void sampleTest() {
-        Assertions.assertFalse(testInstanceSame);
+    public void LoadDictionary() throws Exception {
+        suggestionEngine.loadDictionaryData( Paths.get( ClassLoader.getSystemResource("words.txt").getPath()));
+
+        Map<String, Integer> wordMap = suggestionEngine.getWordSuggestionDB();
+        // Test that words are found in text file
+        Assertions.assertTrue(wordMap.containsKey("apple"));
+        Assertions.assertTrue(wordMap.containsKey("computer"));
     }
 
+    @Test
+    public void notWords() throws Exception {
+        suggestionEngine.loadDictionaryData( Paths.get( ClassLoader.getSystemResource("words.txt").getPath()));
+
+        Map<String, Integer> wordMap = suggestionEngine.getWordSuggestionDB();
+        // Test that mispelled words are not found in dictionary
+        Assertions.assertFalse(wordMap.containsKey("applr"));
+    }
 
 }
